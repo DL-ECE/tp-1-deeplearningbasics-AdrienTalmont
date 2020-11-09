@@ -141,8 +141,13 @@ sigmoid(1)
 def d_sigmoid(M: np.array)-> np.array:
     return (sigmoid(M)*(1-sigmoid(M)))
 
+#def softmax(X: np.array)-> np.array:
+#    expo = np.exp(X)
+#    exposum = np.sum(np.exp(X))
+#    return expo/exposum
+
 def softmax(X: np.array)-> np.array:
-    return np.exp(X)/np.sum(X_exp,axis=1).reshape(-1,1)
+    return np.exp(X)/np.sum(np.exp(X),axis=1).reshape(-1,1)
 
 """## Feed forward NN
 
@@ -337,9 +342,13 @@ It will help us understand why the neural network failed sometimes to classify i
 """
 
 nsample = 1000
-X_demo = X_test[:nsample,:]
+
+X_test_ = normalize_data(X_test)
+y_test_ = target_to_one_hot(y_test)
+
+X_demo = X_test_[:nsample,:]
 y_demo = ffnn.forward_pass(X_demo)
-y_true = y_test[:nsample,:]
+y_true = y_test_[:nsample,:]
 
 index_to_plot = 50 
 plot_one_image(X_demo, y_true, index_to_plot)
@@ -348,14 +357,22 @@ plot_one_image(X_demo, y_true, index_to_plot)
 prediction = np.argmax(y_demo[index_to_plot,:])
 true_target = np.argmax(y_true[index_to_plot,:])
 
-# is it the same number ?
+print(prediction)
+print(true_target)
+
+# is it the same number ? 
+
+#   clearly not
 
 # loop arround the demo test set and try to find a miss prediction
+errors=0
 for i in range(0, nsample):   
-    prediction = None # Todo
-    true_target = None # Todo
+    prediction = np.argmax(y_demo[i,:])
+    true_target = np.argmax(y_true[i,:])
     if prediction != true_target:
-        # TODO
+        errors+=1
+
+print("There is {} errors out of a {} sample. ( {}% )".format(errors,nsample,errors*100/nsample))
 
 """## Open analysis
 
