@@ -103,7 +103,7 @@ def normalize_data(dataset: np.array) -> np.array:
     #normalized_dataset = dataset/255
     return normalized_dataset
 
-normalize_data(mnist_data)[0]
+#normalize_data(mnist_data)[0]
 
 """It's also important to find a good representation of the target.
 
