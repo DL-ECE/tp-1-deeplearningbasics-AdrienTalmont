@@ -370,6 +370,15 @@ Also explain how the neural network behave when changing them ?
 
 ## Open analysis answer
 
-TODO
+minibatch_size: taille des échantillons d'entraînement. L'augmenter améliore la qualité de la comparaison
+
+nepoch : le nombre de cycles à travers les données d'entrainement. L'augmenter affine la précision mais chaque cycle est coûteux en temps d'éxecution 
+
+config : augmente le nombre de modules et de features
+
+learning_rate : détermine la vitesse laquelle notre accuracy converge
+
+
+Afin de trouver les paramètres optimaux , j'ai utilisé une technique révolutionnaire développée dans les laboratoires de Google: la technique du doigt mouillé.
 """
 
